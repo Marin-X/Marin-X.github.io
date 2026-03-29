@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Marin Xhemollari</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero {
+            padding: 10rem 3rem 4rem; text-align: center; position: relative;
+        }
+        .page-hero::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
+        }
+        .page-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300;
+        }
+        .page-hero h1 strong { font-weight: 700; }
+        .page-hero p {
+            color: var(--text-secondary); margin-top: 1rem;
+            max-width: 550px; margin-left: auto; margin-right: auto;
+        }
+
+        .contact-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+        }
+
+        .contact-form {
+            max-width: 100%;
+        }
+
+        .contact-info {
+            display: flex; flex-direction: column; gap: 1.5rem;
+        }
+
+        .contact-method {
+            display: flex; align-items: flex-start; gap: 1rem;
+            padding: 1.25rem;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+        .contact-method:hover { border-color: var(--border-hover); }
+        .contact-method-icon {
+            width: 40px; height: 40px; border-radius: 8px;
+            background: var(--emerald-subtle);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .contact-method-icon svg {
+            width: 18px; height: 18px; color: var(--emerald-bright);
+        }
+        .contact-method-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem; color: var(--emerald-bright);
+            letter-spacing: 0.1em; text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+        .contact-method-value {
+            font-size: 0.9rem; color: var(--text-primary);
+        }
+        .contact-method-value a {
+            color: var(--text-primary); transition: color 0.3s ease;
+        }
+        .contact-method-value a:hover { color: var(--emerald-bright); }
+
+        .open-to {
+            margin-top: 1rem; padding: 1.5rem;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .open-to h3 {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+            color: var(--emerald-bright); letter-spacing: 0.15em;
+            text-transform: uppercase; margin-bottom: 1rem;
+        }
+        .open-to-list {
+            list-style: none; display: flex; flex-direction: column; gap: 0.6rem;
+        }
+        .open-to-list li {
+            font-size: 0.85rem; color: var(--text-secondary);
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        .open-to-list li::before {
+            content: ''; display: inline-block;
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--emerald-bright); flex-shrink: 0;
+        }
+
+        .form-success {
+            display: none; text-align: center; padding: 3rem;
+            background: var(--bg-card); border: 1px solid var(--border-hover);
+            border-radius: 10px;
+        }
+        .form-success h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem; font-weight: 600; margin-bottom: 0.5rem;
+            color: var(--emerald-bright);
+        }
+        .form-success p { color: var(--text-secondary); }
+
+        @media (max-width: 900px) {
+            .page-hero { padding: 8rem 1.5rem 3rem; }
+            .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">M<span>.</span></a>
+        <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="page-hero fade-in">
+        <h1>Get in <strong>Touch</strong></h1>
+        <p>Open to collaborations, research opportunities, and conversations about quantitative finance and data science.</p>
+    </section>
+
+    <section class="section">
+        <div class="contact-grid">
+            <!-- Contact Form -->
+            <div class="contact-form fade-in">
+                <div class="section-label" style="margin-bottom: 2rem;">Send a Message</div>
+
+                <!-- Replace YOUR_FORMSPREE_ID with your actual Formspree form ID -->
+                <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="What's this about?">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell me more..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        Send Message
+                    </button>
+                </form>
+
+                <div class="form-success" id="formSuccess">
+                    <h3>Message Sent</h3>
+                    <p>Thanks for reaching out. I'll get back to you soon.</p>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info fade-in" style="transition-delay: 0.15s;">
+                <div class="contact-method">
+                    <div class="contact-method-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </div>
+                    <div>
+                        <div class="contact-method-label">Email</div>
+                        <div class="contact-method-value">
+                            <a href="mailto:your.email@umich.edu">your.email@umich.edu</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-method">
+                    <div class="contact-method-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    </div>
+                    <div>
+                        <div class="contact-method-label">GitHub</div>
+                        <div class="contact-method-value">
+                            <a href="https://github.com/Marin-X" target="_blank">github.com/Marin-X</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-method">
+                    <div class="contact-method-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    </div>
+                    <div>
+                        <div class="contact-method-label">LinkedIn</div>
+                        <div class="contact-method-value">
+                            <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank">Connect on LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="open-to">
+                    <h3>Open To</h3>
+                    <ul class="open-to-list">
+                        <li>Research collaborations in data science or quantitative finance</li>
+                        <li>Internship and co-op opportunities</li>
+                        <li>Open source project partnerships</li>
+                        <li>Speaking about my journey from medicine to tech</li>
+                        <li>General networking and mentorship</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank">LinkedIn</a></p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

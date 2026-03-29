@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Marin Xhemollari</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero {
+            padding: 10rem 3rem 4rem;
+            text-align: center;
+            position: relative;
+        }
+        .page-hero::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
+        }
+        .page-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+        }
+        .page-hero h1 strong { font-weight: 700; }
+        .page-hero p {
+            color: var(--text-secondary); margin-top: 1rem;
+            max-width: 550px; margin-left: auto; margin-right: auto;
+        }
+
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+        }
+        .about-text p {
+            color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;
+        }
+        .about-text p:first-of-type::first-letter {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem; float: left; line-height: 1;
+            margin-right: 0.5rem; margin-top: 0.1rem;
+            color: var(--emerald-bright); font-weight: 600;
+        }
+        .about-details {
+            display: flex; flex-direction: column; gap: 1.5rem;
+        }
+
+        .timeline-section { margin-top: 2rem; }
+
+        .resume-download {
+            text-align: center; padding: 4rem 3rem;
+            position: relative;
+        }
+        .resume-download::before {
+            content: ''; position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 500px; height: 250px;
+            background: radial-gradient(ellipse, var(--emerald-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .resume-download p {
+            color: var(--text-secondary); margin-bottom: 1.5rem; position: relative;
+        }
+
+        @media (max-width: 900px) {
+            .page-hero { padding: 8rem 1.5rem 3rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">M<span>.</span></a>
+        <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="page-hero fade-in">
+        <h1>About <strong>Me</strong></h1>
+        <p>From medicine in Romania to data science at the University of Michigan — a non-linear path driven by curiosity and conviction.</p>
+    </section>
+
+    <section class="section">
+        <div class="about-grid">
+            <div class="about-text fade-in">
+                <p>Originally from Albania, I bring a perspective shaped by international experience and a willingness to take unconventional paths. After studying medicine in Romania, I realized my true fascination lay in how data and algorithms can decode complex systems — particularly financial markets.</p>
+                <p>I pivoted to computer science in the United States, where I built a strong foundation in software engineering, mathematics, and statistical analysis. I've maintained a 3.96 GPA while working part-time and building real projects that apply technical skills to financial problems.</p>
+                <p>Now pursuing Data Science at the University of Michigan, I'm focused on quantitative finance, statistical modeling, and market microstructure. My long-term goal is quantitative trading, where mathematical rigor meets real-world market dynamics.</p>
+
+                <div class="timeline-section">
+                    <div class="section-label" style="margin-bottom: 1.5rem;">Journey</div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Fall 2026</div>
+                            <div class="timeline-title">University of Michigan</div>
+                            <div class="timeline-sub">B.S. Data Science — College of LSA</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023 — 2026</div>
+                            <div class="timeline-title">Oakland Community College</div>
+                            <div class="timeline-sub">Pre-Engineering / CIS Software Engineering — 3.96 GPA</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Earlier</div>
+                            <div class="timeline-title">Medical Studies — Romania</div>
+                            <div class="timeline-sub">The foundation that taught me analytical thinking and discipline</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-details fade-in" style="transition-delay: 0.15s;">
+                <div class="detail-card">
+                    <div class="detail-card-label">Focus Areas</div>
+                    <div class="detail-card-value">Quantitative Finance</div>
+                    <div class="detail-card-sub">Statistical Modeling · Market Microstructure · Risk Analysis</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-card-label">Currently Studying</div>
+                    <div class="detail-card-value">Statistics & Linear Algebra</div>
+                    <div class="detail-card-sub">Building the mathematical foundation for quantitative research</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-card-label">Career Goal</div>
+                    <div class="detail-card-value">Quantitative Trading</div>
+                    <div class="detail-card-sub">M.S. Quantitative Finance & Risk Management → Quant roles</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-card-label">Technical Skills</div>
+                    <div class="detail-card-value" style="font-size: 1.1rem;">Languages & Tools</div>
+                    <div style="margin-top: 0.75rem;">
+                        <div class="skills-grid">
+                            <div class="skill-item">Python</div>
+                            <div class="skill-item">Java</div>
+                            <div class="skill-item">Kotlin</div>
+                            <div class="skill-item">JavaScript</div>
+                            <div class="skill-item">C++</div>
+                            <div class="skill-item">SQL</div>
+                            <div class="skill-item">HTML/CSS</div>
+                            <div class="skill-item">PHP</div>
+                            <div class="skill-item">Spring Boot</div>
+                            <div class="skill-item">REST APIs</div>
+                            <div class="skill-item">Git</div>
+                            <div class="skill-item">Android</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- RESUME DOWNLOAD -->
+    <section class="resume-download fade-in">
+        <div class="section-label" style="justify-content: center;">
+            <span style="display:none;">—</span>Résumé
+        </div>
+        <p>Download my full résumé for a complete overview of my experience and education.</p>
+        <a href="#" class="btn btn-primary" style="position: relative;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+        </a>
+    </section>
+
+    <footer>
+        <p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank">LinkedIn</a></p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
