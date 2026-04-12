@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects — Marin Xhemollari</title>
+    <link rel="icon" type="image/svg+xml" href="frog-favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,7 +28,6 @@
             max-width: 550px; margin-left: auto; margin-right: auto;
         }
 
-        /* Filter tabs */
         .filter-tabs {
             display: flex; gap: 0.5rem; justify-content: center;
             margin-bottom: 3rem; flex-wrap: wrap;
@@ -44,7 +44,6 @@
             background: var(--emerald-subtle);
         }
 
-        /* Project grid */
         .projects-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 1.5rem;
@@ -80,7 +79,7 @@
 <body>
 
     <nav>
-        <a href="index.html" class="nav-logo">M<span>.</span></a>
+        <a href="index.html" class="nav-logo"><img src="frog-logo.svg" alt="logo"></a>
         <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
             <span></span><span></span><span></span>
         </button>
@@ -98,7 +97,6 @@
     </section>
 
     <section class="section">
-        <!-- Filter tabs -->
         <div class="filter-tabs fade-in">
             <button class="filter-tab active" onclick="filterProjects('all')">All</button>
             <button class="filter-tab" onclick="filterProjects('data-science')">Data Science</button>
@@ -108,8 +106,32 @@
 
         <div class="projects-grid">
 
+            <!-- Market Microstructure -->
+            <div class="card project-card fade-in" data-category="data-science">
+                <div class="project-card-img">
+                    <img src="analysis_30min.png" alt="Market Microstructure" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>Market Microstructure</h3>
+                    <p>BTC/USDT order book analysis — real-time data collection, spread dynamics, order flow imbalance, and statistical regression on 600+ snapshots.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">Scipy</span>
+                        <span class="tag">Binance API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Marin-X/market-microstructure" target="_blank" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <!-- DepthLens -->
-            <div class="card project-card fade-in" data-category="android data-science">
+            <div class="card project-card fade-in" data-category="android data-science" style="transition-delay:0.1s;">
                 <div class="project-card-img">
                     <span>[ screenshot ]</span>
                     <span class="project-status status-live">Live</span>
@@ -133,7 +155,7 @@
             </div>
 
             <!-- Finance Ledger API -->
-            <div class="card project-card fade-in" data-category="backend" style="transition-delay:0.1s;">
+            <div class="card project-card fade-in" data-category="backend" style="transition-delay:0.15s;">
                 <div class="project-card-img">
                     <span>[ screenshot ]</span>
                     <span class="project-status status-live">Live</span>
@@ -157,7 +179,7 @@
             </div>
 
             <!-- XhemoBank -->
-            <div class="card project-card fade-in" data-category="android" style="transition-delay:0.15s;">
+            <div class="card project-card fade-in" data-category="android" style="transition-delay:0.2s;">
                 <div class="project-card-img">
                     <span>[ screenshot ]</span>
                     <span class="project-status status-live">Live</span>
@@ -179,32 +201,11 @@
                 </div>
             </div>
 
-            <!-- Upcoming DS Project -->
-            <div class="card project-card fade-in" data-category="data-science" style="transition-delay:0.2s;">
-                <div class="project-card-img">
-                    <span>[ coming soon ]</span>
-                    <span class="project-status status-wip">In Progress</span>
-                </div>
-                <div class="project-card-body">
-                    <h3>Economic Indicator Dashboard</h3>
-                    <p>Interactive dashboard pulling data from the FRED API to visualize and correlate key economic indicators with market movements.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Pandas</span>
-                        <span class="tag">Plotly</span>
-                        <span class="tag">FRED API</span>
-                    </div>
-                    <div class="project-links">
-                        <span class="project-link" style="color: var(--gold-muted);">Coming soon</span>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
 
     <footer>
-        <p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank">LinkedIn</a></p>
+        <p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/marinxhemollari" target="_blank">LinkedIn</a></p>
     </footer>
 
     <script>
@@ -216,7 +217,6 @@
         function filterProjects(category) {
             document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
-
             document.querySelectorAll('.project-card').forEach(card => {
                 if (category === 'all' || card.dataset.category.includes(category)) {
                     card.style.display = '';
