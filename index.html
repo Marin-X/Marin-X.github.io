@@ -394,35 +394,19 @@
         (function() {
             const splash = document.getElementById('splash');
             const body = document.body;
-            const SPLASH_KEY = 'qf_splash_seen';
-            const SPLASH_EXPIRY = 30 * 60 * 1000; // 30 minutes — don't re-show within same session
 
-            // Check if splash was recently shown
-            const lastSeen = sessionStorage.getItem(SPLASH_KEY);
-            const skipSplash = lastSeen && (Date.now() - parseInt(lastSeen)) < SPLASH_EXPIRY;
-
-            if (skipSplash) {
-                // Skip splash entirely
-                splash.remove();
-                body.classList.remove('splash-active');
-                body.classList.add('splash-done');
-            } else {
-                // Show splash, then trigger exit after delay
-                sessionStorage.setItem(SPLASH_KEY, Date.now().toString());
+            setTimeout(function() {
+                splash.classList.add('exit');
 
                 setTimeout(function() {
-                    splash.classList.add('exit');
+                    body.classList.remove('splash-active');
+                    body.classList.add('splash-done');
+                }, 700);
 
-                    setTimeout(function() {
-                        body.classList.remove('splash-active');
-                        body.classList.add('splash-done');
-                    }, 700);
-
-                    setTimeout(function() {
-                        splash.remove();
-                    }, 1300);
-                }, 1800); // Logo stays visible for 1.8s before exit starts
-            }
+                setTimeout(function() {
+                    splash.remove();
+                }, 1300);
+            }, 1800);
         })();
 
         // ═══════ FADE-IN OBSERVER ═══════
