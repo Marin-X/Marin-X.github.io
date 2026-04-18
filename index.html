@@ -10,6 +10,110 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* ═══════ SPLASH SCREEN ═══════ */
+        .splash {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .splash::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(46, 204, 113, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .splash-logo {
+            width: 220px;
+            height: 220px;
+            filter: drop-shadow(0 0 40px rgba(46, 204, 113, 0.3))
+                    drop-shadow(0 0 80px rgba(46, 204, 113, 0.1));
+            animation: splashPulse 1.5s ease-in-out infinite alternate;
+            transition: none;
+        }
+        .splash-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: rgba(232, 232, 232, 0);
+            letter-spacing: 0.15em;
+            margin-top: 2rem;
+            animation: splashTextIn 0.6s ease-out 0.3s forwards;
+        }
+
+        @keyframes splashPulse {
+            from { filter: drop-shadow(0 0 40px rgba(46, 204, 113, 0.25))
+                           drop-shadow(0 0 80px rgba(46, 204, 113, 0.08)); }
+            to   { filter: drop-shadow(0 0 60px rgba(46, 204, 113, 0.4))
+                           drop-shadow(0 0 100px rgba(46, 204, 113, 0.15)); }
+        }
+        @keyframes splashTextIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 0.4; transform: translateY(0); }
+        }
+
+        /* ─── Exit animation ─── */
+        .splash.exit .splash-logo {
+            animation: splashShrink 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .splash.exit .splash-text {
+            animation: splashTextOut 0.3s ease-in forwards;
+        }
+        .splash.exit {
+            animation: splashFade 0.5s ease-in 0.7s forwards;
+        }
+
+        @keyframes splashShrink {
+            0%   { transform: scale(1); opacity: 1;
+                   filter: drop-shadow(0 0 60px rgba(46, 204, 113, 0.4)); }
+            60%  { transform: scale(0.15); opacity: 0.8;
+                   filter: drop-shadow(0 0 20px rgba(46, 204, 113, 0.2)); }
+            100% { transform: scale(0.08); opacity: 0;
+                   filter: drop-shadow(0 0 0px transparent); }
+        }
+        @keyframes splashTextOut {
+            to { opacity: 0; transform: translateY(-8px); }
+        }
+        @keyframes splashFade {
+            to { opacity: 0; visibility: hidden; pointer-events: none; }
+        }
+
+        /* Hide page content until splash exits */
+        body.splash-active {
+            overflow: hidden;
+        }
+        body.splash-active nav,
+        body.splash-active .hero,
+        body.splash-active .section,
+        body.splash-active .divider,
+        body.splash-active .cta-banner,
+        body.splash-active footer {
+            opacity: 0;
+        }
+        body.splash-done nav,
+        body.splash-done .hero,
+        body.splash-done .section,
+        body.splash-done .divider,
+        body.splash-done .cta-banner,
+        body.splash-done footer {
+            animation: pageReveal 0.8s ease-out forwards;
+        }
+        @keyframes pageReveal {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ═══════ HERO ═══════ */
         .hero {
             min-height: 100vh; display: flex; align-items: center;
             padding: 8rem 3rem 4rem; position: relative; overflow: hidden;
@@ -156,10 +260,18 @@
             .hero-cta { flex-direction: column; }
             .featured-grid { grid-template-columns: 1fr; }
             .cta-buttons { flex-direction: column; align-items: center; }
+            .splash-logo { width: 160px; height: 160px; }
+            .splash-text { font-size: 1rem; }
         }
     </style>
 </head>
-<body>
+<body class="splash-active">
+
+    <!-- ═══════ SPLASH SCREEN ═══════ -->
+    <div class="splash" id="splash">
+        <img src="frog-logo.svg" alt="QuantFolio" class="splash-logo">
+        <div class="splash-text">Marin Xhemollari</div>
+    </div>
 
     <nav>
         <a href="index.html" class="nav-logo"><img src="frog-logo.svg" alt="logo"></a>
@@ -278,6 +390,42 @@
     </footer>
 
     <script>
+        // ═══════ SPLASH SCREEN LOGIC ═══════
+        (function() {
+            const splash = document.getElementById('splash');
+            const body = document.body;
+            const SPLASH_KEY = 'qf_splash_seen';
+            const SPLASH_EXPIRY = 30 * 60 * 1000; // 30 minutes — don't re-show within same session
+
+            // Check if splash was recently shown
+            const lastSeen = sessionStorage.getItem(SPLASH_KEY);
+            const skipSplash = lastSeen && (Date.now() - parseInt(lastSeen)) < SPLASH_EXPIRY;
+
+            if (skipSplash) {
+                // Skip splash entirely
+                splash.remove();
+                body.classList.remove('splash-active');
+                body.classList.add('splash-done');
+            } else {
+                // Show splash, then trigger exit after delay
+                sessionStorage.setItem(SPLASH_KEY, Date.now().toString());
+
+                setTimeout(function() {
+                    splash.classList.add('exit');
+
+                    setTimeout(function() {
+                        body.classList.remove('splash-active');
+                        body.classList.add('splash-done');
+                    }, 700);
+
+                    setTimeout(function() {
+                        splash.remove();
+                    }, 1300);
+                }, 1800); // Logo stays visible for 1.8s before exit starts
+            }
+        })();
+
+        // ═══════ FADE-IN OBSERVER ═══════
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
