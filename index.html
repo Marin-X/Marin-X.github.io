@@ -395,6 +395,20 @@
             const splash = document.getElementById('splash');
             const body = document.body;
 
+            // Detect navigation type
+            const navEntry = performance.getEntriesByType('navigation')[0];
+            const isReload = navEntry && navEntry.type === 'reload';
+            const isInternal = document.referrer && new URL(document.referrer).hostname === location.hostname;
+
+            // Show splash on: fresh visit (no referrer / external) or refresh
+            // Skip on: internal link clicks (Home from Projects, etc.)
+            if (isInternal && !isReload) {
+                splash.remove();
+                body.classList.remove('splash-active');
+                body.classList.add('splash-done');
+                return;
+            }
+
             setTimeout(function() {
                 splash.classList.add('exit');
 
