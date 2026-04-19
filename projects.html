@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Marin Xhemollari</title>
+    <title>Projects — Marin Xhemollari</title>
 
     <!-- ===== SECURITY HEADERS ===== -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
@@ -34,78 +34,57 @@
             color: var(--text-secondary); margin-top: 1rem;
             max-width: 550px; margin-left: auto; margin-right: auto;
         }
-        .contact-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+
+        .filter-tabs {
+            display: flex; gap: 0.5rem; justify-content: center;
+            margin-bottom: 3rem; flex-wrap: wrap;
         }
-        .contact-form { max-width: 100%; }
-        .contact-info {
-            display: flex; flex-direction: column; gap: 1.5rem;
-        }
-        .contact-method {
-            display: flex; align-items: flex-start; gap: 1rem;
-            padding: 1.25rem;
+        .filter-tab {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+            padding: 0.5rem 1.2rem; border-radius: 6px;
             background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 8px; transition: border-color 0.3s ease;
+            color: var(--text-secondary); cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .contact-method:hover { border-color: var(--border-hover); }
-        .contact-method-icon {
-            width: 40px; height: 40px; border-radius: 8px;
+        .filter-tab:hover, .filter-tab.active {
+            border-color: var(--emerald-bright); color: var(--emerald-bright);
             background: var(--emerald-subtle);
+        }
+
+        .projects-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card { overflow: hidden; position: relative; }
+        .project-card-img {
+            width: 100%; height: 200px;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
             display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
+            border-bottom: 1px solid var(--border); position: relative;
         }
-        .contact-method-icon svg {
-            width: 18px; height: 18px; color: var(--emerald-bright);
+        .project-card-img span {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted);
         }
-        .contact-method-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem; color: var(--emerald-bright);
-            letter-spacing: 0.1em; text-transform: uppercase;
-            margin-bottom: 0.25rem;
+        .project-card-body { padding: 1.5rem; }
+        .project-card-body h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem;
         }
-        .contact-method-value { font-size: 0.9rem; color: var(--text-primary); }
-        .contact-method-value a {
-            color: var(--text-primary); transition: color 0.3s ease;
-        }
-        .contact-method-value a:hover { color: var(--emerald-bright); }
-        .open-to {
-            margin-top: 1rem; padding: 1.5rem;
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 8px;
-        }
-        .open-to h3 {
-            font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
-            color: var(--emerald-bright); letter-spacing: 0.15em;
-            text-transform: uppercase; margin-bottom: 1rem;
-        }
-        .open-to-list {
-            list-style: none; display: flex; flex-direction: column; gap: 0.6rem;
-        }
-        .open-to-list li {
+        .project-card-body p {
             font-size: 0.85rem; color: var(--text-secondary);
-            display: flex; align-items: center; gap: 0.6rem;
+            margin-bottom: 1rem; line-height: 1.6;
         }
-        .open-to-list li::before {
-            content: ''; display: inline-block;
-            width: 6px; height: 6px; border-radius: 50%;
-            background: var(--emerald-bright); flex-shrink: 0;
-        }
-        /* Honeypot — off-screen, hidden from humans */
-        .hp-field {
-            position: absolute !important;
-            left: -9999px !important;
-            width: 1px !important;
-            height: 1px !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
-        }
+        .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .project-links { display: flex; gap: 1rem; }
+
         @media (max-width: 900px) {
             .page-hero { padding: 8rem 1.5rem 3rem; }
-            .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .projects-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+
     <nav>
         <a href="index.html" class="nav-logo"><img src="frog-logo.svg" alt="logo"></a>
         <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
@@ -113,112 +92,191 @@
         </button>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="contact.html" class="active">Contact</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
-    <section class="page-hero fade-in">
-        <h1>Get in <strong>Touch</strong></h1>
-        <p>Open to collaborations, research opportunities, and conversations about quantitative finance and data science.</p>
-    </section>
-    <section class="section">
-        <div class="contact-grid">
-            <div class="contact-form fade-in">
-                <div class="section-label" style="margin-bottom: 2rem;">Send a Message</div>
-                <form action="https://formspree.io/f/xgopaany" method="POST">
-                    <!-- Honeypot: bots fill it, humans don't see it -->
-                    <div class="hp-field" aria-hidden="true">
-                        <label for="hp-gotcha">Leave this field empty</label>
-                        <input type="text" id="hp-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
-                    </div>
 
-                    <div class="form-group">
-                        <label for="contact-name">Name</label>
-                        <input type="text" id="contact-name" name="name" placeholder="Your name" maxlength="100" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-email">Email</label>
-                        <input type="email" id="contact-email" name="email" placeholder="your@email.com" maxlength="254" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-subject">Subject</label>
-                        <input type="text" id="contact-subject" name="subject" placeholder="What is this about?" maxlength="200">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-message">Message</label>
-                        <textarea id="contact-message" name="message" placeholder="Tell me more..." maxlength="5000" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
-                </form>
-            </div>
-            <div class="contact-info fade-in" style="transition-delay: 0.15s;">
-                <div class="contact-method">
-                    <div class="contact-method-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                    </div>
-                    <div>
-                        <div class="contact-method-label">Email</div>
-                        <div class="contact-method-value" id="email-display" data-u="marinxhemollari" data-d="gmail.com">
-                            <noscript>Enable JavaScript to view email</noscript>
-                        </div>
-                    </div>
+    <section class="page-hero fade-in">
+        <h1>My <strong>Projects</strong></h1>
+        <p>A collection of applications, tools, and experiments spanning data science, Android development, and backend engineering.</p>
+    </section>
+
+    <section class="section">
+        <div class="filter-tabs fade-in">
+            <button class="filter-tab active" onclick="filterProjects('all', event)">All</button>
+            <button class="filter-tab" onclick="filterProjects('data-science', event)">Data Science</button>
+            <button class="filter-tab" onclick="filterProjects('android', event)">Android</button>
+            <button class="filter-tab" onclick="filterProjects('backend', event)">Backend</button>
+        </div>
+
+        <div class="projects-grid">
+
+            <div class="card project-card fade-in" data-category="data-science">
+                <div class="project-card-img">
+                    <img src="https://raw.githubusercontent.com/Marin-X/QuantFolio/main/dashboard.png" alt="QuantFolio" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
                 </div>
-                <div class="contact-method">
-                    <div class="contact-method-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                <div class="project-card-body">
+                    <h3>QuantFolio</h3>
+                    <p>Quantitative portfolio optimization engine — efficient frontier with CML, risk parity, Monte Carlo simulation, VaR/CVaR, backtesting, return distributions, and rolling analysis. Modular display with toggle controls.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Streamlit</span>
+                        <span class="tag">SciPy</span>
+                        <span class="tag">Plotly</span>
+                        <span class="tag">yfinance</span>
                     </div>
-                    <div>
-                        <div class="contact-method-label">GitHub</div>
-                        <div class="contact-method-value"><a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer">github.com/Marin-X</a></div>
+                    <div class="project-links">
+                        <a href="https://github.com/Marin-X/QuantFolio" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
                     </div>
-                </div>
-                <div class="contact-method">
-                    <div class="contact-method-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                    </div>
-                    <div>
-                        <div class="contact-method-label">LinkedIn</div>
-                        <div class="contact-method-value"><a href="https://linkedin.com/in/marinxhemollari" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a></div>
-                    </div>
-                </div>
-                <div class="open-to">
-                    <h3>Open To</h3>
-                    <ul class="open-to-list">
-                        <li>Research collaborations in data science or quantitative finance</li>
-                        <li>Internship and co-op opportunities</li>
-                        <li>Open source project partnerships</li>
-                        <li>Speaking about my journey from medicine to tech</li>
-                        <li>General networking and mentorship</li>
-                    </ul>
                 </div>
             </div>
+
+            <div class="card project-card fade-in" data-category="data-science" style="transition-delay:0.05s;">
+                <div class="project-card-img">
+                    <img src="https://raw.githubusercontent.com/Marin-X/Derivexus/main/dashboard.png" alt="Derivexus" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>Derivexus</h3>
+                    <p>Options pricing and Greeks visualization engine — Black-Scholes pricing, full Greeks suite (Δ, Γ, Θ, ν, ρ), sensitivity analysis, implied volatility surface from live market data, payoff diagrams, and put-call parity verification.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Streamlit</span>
+                        <span class="tag">Black-Scholes</span>
+                        <span class="tag">Plotly</span>
+                        <span class="tag">yfinance</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Marin-X/Derivexus" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card project-card fade-in" data-category="android data-science" style="transition-delay:0.1s;">
+                <div class="project-card-img">
+                    <img src="https://raw.githubusercontent.com/Marin-X/DepthLens/main/screenshots/dom_charts.png" alt="DepthLens" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>DepthLens</h3>
+                    <p>Real-time order book viewer with paper trading, VWAP/TWAP analytics, and order flow imbalance signal detection. WebSocket streaming at 100ms with persistent trade history and live P&L tracking.</p>
+                    <div class="project-tags">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag">Android</span>
+                        <span class="tag">WebSocket</span>
+                        <span class="tag">VWAP</span>
+                        <span class="tag">Binance API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Marin-X/DepthLens" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card project-card fade-in" data-category="data-science" style="transition-delay:0.15s;">
+                <div class="project-card-img">
+                    <img src="analysis_30min.png" alt="Market Microstructure" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>Market Microstructure</h3>
+                    <p>BTC/USDT order book analysis — real-time data collection, spread dynamics, order flow imbalance, and statistical regression on 600+ snapshots.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">Scipy</span>
+                        <span class="tag">Binance API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Marin-X/market-microstructure" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card project-card fade-in" data-category="backend" style="transition-delay:0.2s;">
+                <div class="project-card-img">
+                    <span>[ screenshot ]</span>
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>Finance Ledger API</h3>
+                    <p>RESTful API for financial transaction management built with Spring Boot. Features comprehensive CRUD operations, JWT authentication, data validation, and clean architecture patterns.</p>
+                    <div class="project-tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">REST</span>
+                        <span class="tag">MySQL</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card project-card fade-in" data-category="android" style="transition-delay:0.25s;">
+                <div class="project-card-img">
+                    <span>[ screenshot ]</span>
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>XhemoBank</h3>
+                    <p>Android banking application demonstrating core mobile development patterns including user authentication, account management, and transaction handling.</p>
+                    <div class="project-tags">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag">Android</span>
+                        <span class="tag">SQLite</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
+
     <footer>
         <p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://linkedin.com/in/marinxhemollari" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
     </footer>
 
     <script>
-        // Fade-in observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Email obfuscation — keeps plain address out of static HTML for scrapers
-        (function() {
-            var el = document.getElementById('email-display');
-            if (!el) return;
-            var u = el.getAttribute('data-u');
-            var d = el.getAttribute('data-d');
-            var addr = u + '@' + d;
-            var a = document.createElement('a');
-            a.href = 'mailto:' + addr;
-            a.textContent = addr;
-            el.innerHTML = '';
-            el.appendChild(a);
-        })();
+        function filterProjects(category, ev) {
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            if (ev && ev.currentTarget) ev.currentTarget.classList.add('active');
+            document.querySelectorAll('.project-card').forEach(card => {
+                if (category === 'all' || card.dataset.category.includes(category)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
