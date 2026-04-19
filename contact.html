@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Marin Xhemollari</title>
+
+    <!-- ===== SECURITY HEADERS (meta fallback for GitHub Pages) ===== -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
     <link rel="icon" type="image/svg+xml" href="frog-favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,6 +90,15 @@
             width: 6px; height: 6px; border-radius: 50%;
             background: var(--emerald-bright); flex-shrink: 0;
         }
+        /* Honeypot field — hidden from humans, visible to bots */
+        .hp-field {
+            position: absolute !important;
+            left: -9999px !important;
+            width: 1px !important;
+            height: 1px !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
         @media (max-width: 900px) {
             .page-hero { padding: 8rem 1.5rem 3rem; }
             .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -111,21 +127,27 @@
             <div class="contact-form">
                 <div class="section-label" style="margin-bottom: 2rem;">Send a Message</div>
                 <form action="https://formspree.io/f/xgopaany" method="POST">
+                    <!-- Honeypot: bots fill it, humans don't see it -->
+                    <div class="hp-field" aria-hidden="true">
+                        <label for="hp-gotcha">Leave this field empty</label>
+                        <input type="text" id="hp-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+                    </div>
+
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                        <label for="contact-name">Name</label>
+                        <input type="text" id="contact-name" name="name" placeholder="Your name" maxlength="100" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        <label for="contact-email">Email</label>
+                        <input type="email" id="contact-email" name="email" placeholder="your@email.com" maxlength="254" required>
                     </div>
                     <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" placeholder="What is this about?">
+                        <label for="contact-subject">Subject</label>
+                        <input type="text" id="contact-subject" name="subject" placeholder="What is this about?" maxlength="200">
                     </div>
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="Tell me more..." required></textarea>
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" name="message" placeholder="Tell me more..." maxlength="5000" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
                 </form>
@@ -137,7 +159,9 @@
                     </div>
                     <div>
                         <div class="contact-method-label">Email</div>
-                        <div class="contact-method-value">marinxhemollari@gmail.com</div>
+                        <div class="contact-method-value" id="email-display" data-u="marinxhemollari" data-d="gmail.com">
+                            <noscript>Enable JavaScript to view email</noscript>
+                        </div>
                     </div>
                 </div>
                 <div class="contact-method">
@@ -146,7 +170,7 @@
                     </div>
                     <div>
                         <div class="contact-method-label">GitHub</div>
-                        <div class="contact-method-value"><a href="https://github.com/Marin-X" target="_blank">github.com/Marin-X</a></div>
+                        <div class="contact-method-value"><a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer">github.com/Marin-X</a></div>
                     </div>
                 </div>
                 <div class="contact-method">
@@ -155,7 +179,7 @@
                     </div>
                     <div>
                         <div class="contact-method-label">LinkedIn</div>
-                        <div class="contact-method-value"><a href="https://linkedin.com/in/marinxhemollari" target="_blank">Connect on LinkedIn</a></div>
+                        <div class="contact-method-value"><a href="https://linkedin.com/in/marinxhemollari" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a></div>
                     </div>
                 </div>
                 <div class="open-to">
@@ -172,7 +196,23 @@
         </div>
     </section>
     <footer>
-        <p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/marinxhemollari" target="_blank">LinkedIn</a></p>
+        <p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://linkedin.com/in/marinxhemollari" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
     </footer>
+
+    <script>
+        // Email obfuscation — keeps plain address out of static HTML for scrapers
+        (function() {
+            var el = document.getElementById('email-display');
+            if (!el) return;
+            var u = el.getAttribute('data-u');
+            var d = el.getAttribute('data-d');
+            var addr = u + '@' + d;
+            var a = document.createElement('a');
+            a.href = 'mailto:' + addr;
+            a.textContent = addr;
+            el.innerHTML = '';
+            el.appendChild(a);
+        })();
+    </script>
 </body>
 </html>
