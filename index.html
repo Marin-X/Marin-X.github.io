@@ -6,7 +6,7 @@
     <title>Marin Xhemollari — Data Science & Quantitative Finance</title>
 
     <!-- ===== SECURITY HEADERS ===== -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -17,7 +17,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* ═══════ SPLASH SCREEN ═══════ */
         .splash {
             position: fixed; inset: 0; z-index: 9999; background: #0a0a0a;
             display: flex; align-items: center; justify-content: center;
@@ -44,7 +43,6 @@
             letter-spacing: 0.15em; margin-top: 2rem;
             animation: splashTextIn 0.6s ease-out 0.3s forwards;
         }
-
         @keyframes splashPulse {
             from { filter: drop-shadow(0 0 40px rgba(46, 204, 113, 0.25))
                            drop-shadow(0 0 80px rgba(46, 204, 113, 0.08)); }
@@ -55,53 +53,27 @@
             from { opacity: 0; transform: translateY(10px); }
             to   { opacity: 0.4; transform: translateY(0); }
         }
-
-        .splash.exit .splash-logo {
-            animation: splashShrink 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        .splash.exit .splash-text {
-            animation: splashTextOut 0.3s ease-in forwards;
-        }
-        .splash.exit {
-            animation: splashFade 0.5s ease-in 0.7s forwards;
-        }
-
+        .splash.exit .splash-logo { animation: splashShrink 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .splash.exit .splash-text { animation: splashTextOut 0.3s ease-in forwards; }
+        .splash.exit { animation: splashFade 0.5s ease-in 0.7s forwards; }
         @keyframes splashShrink {
-            0%   { transform: scale(1); opacity: 1;
-                   filter: drop-shadow(0 0 60px rgba(46, 204, 113, 0.4)); }
-            60%  { transform: scale(0.15); opacity: 0.8;
-                   filter: drop-shadow(0 0 20px rgba(46, 204, 113, 0.2)); }
-            100% { transform: scale(0.08); opacity: 0;
-                   filter: drop-shadow(0 0 0px transparent); }
+            0%   { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 60px rgba(46, 204, 113, 0.4)); }
+            60%  { transform: scale(0.15); opacity: 0.8; filter: drop-shadow(0 0 20px rgba(46, 204, 113, 0.2)); }
+            100% { transform: scale(0.08); opacity: 0; filter: drop-shadow(0 0 0px transparent); }
         }
-        @keyframes splashTextOut {
-            to { opacity: 0; transform: translateY(-8px); }
-        }
-        @keyframes splashFade {
-            to { opacity: 0; visibility: hidden; pointer-events: none; }
-        }
-
+        @keyframes splashTextOut { to { opacity: 0; transform: translateY(-8px); } }
+        @keyframes splashFade { to { opacity: 0; visibility: hidden; pointer-events: none; } }
         body.splash-active { overflow: hidden; }
-        body.splash-active nav,
-        body.splash-active .hero,
-        body.splash-active .section,
-        body.splash-active .divider,
-        body.splash-active .cta-banner,
-        body.splash-active footer { opacity: 0; }
-        body.splash-done nav,
-        body.splash-done .hero,
-        body.splash-done .section,
-        body.splash-done .divider,
-        body.splash-done .cta-banner,
-        body.splash-done footer {
+        body.splash-active nav, body.splash-active .hero, body.splash-active .section,
+        body.splash-active .divider, body.splash-active .cta-banner, body.splash-active footer { opacity: 0; }
+        body.splash-done nav, body.splash-done .hero, body.splash-done .section,
+        body.splash-done .divider, body.splash-done .cta-banner, body.splash-done footer {
             animation: pageReveal 0.8s ease-out forwards;
         }
         @keyframes pageReveal {
             from { opacity: 0; transform: translateY(16px); }
             to   { opacity: 1; transform: translateY(0); }
         }
-
-        /* ═══════ HERO ═══════ */
         .hero {
             min-height: 100vh; display: flex; align-items: center;
             padding: 8rem 3rem 4rem; position: relative; overflow: hidden;
@@ -143,9 +115,7 @@
             font-size: 1.1rem; color: var(--text-secondary);
             font-weight: 400; margin-bottom: 2rem; max-width: 480px;
         }
-        .hero-subtitle em {
-            color: var(--emerald-bright); font-style: normal; font-weight: 500;
-        }
+        .hero-subtitle em { color: var(--emerald-bright); font-style: normal; font-weight: 500; }
         .hero-cta { display: flex; gap: 1rem; margin-bottom: 2.5rem; }
         .hero-stats {
             display: flex; gap: 3rem;
@@ -164,8 +134,7 @@
         .hero-card {
             width: 100%; max-width: 360px; aspect-ratio: 3/4;
             background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 10px; overflow: hidden;
-            transition: all 0.4s ease;
+            border-radius: 10px; overflow: hidden; transition: all 0.4s ease;
         }
         .hero-card:hover {
             border-color: var(--border-hover);
@@ -188,12 +157,8 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem;
         }
-        .hero-card-info p {
-            font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;
-        }
+        .hero-card-info p { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; }
         .hero-card-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
-
-        /* ═══════ FEATURED ═══════ */
         .featured-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
@@ -205,23 +170,15 @@
             display: flex; align-items: center; justify-content: center;
             border-bottom: 1px solid var(--border);
         }
-        .featured-card-img span {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem; color: var(--text-muted);
-        }
+        .featured-card-img span { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted); }
         .featured-card-body { padding: 1.5rem; }
         .featured-card-body h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem;
         }
-        .featured-card-body p {
-            font-size: 0.85rem; color: var(--text-secondary);
-            margin-bottom: 1rem; line-height: 1.6;
-        }
+        .featured-card-body p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6; }
         .featured-card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
         .view-all-row { text-align: center; margin-top: 3rem; }
-
-        /* ═══════ CTA ═══════ */
         .cta-banner {
             max-width: 1200px; margin: 4rem auto;
             padding: 5rem 3rem; text-align: center; position: relative;
@@ -243,11 +200,7 @@
             color: var(--text-secondary);
             max-width: 500px; margin: 1rem auto 2rem; position: relative;
         }
-        .cta-buttons {
-            display: flex; gap: 1rem; justify-content: center;
-            flex-wrap: wrap; position: relative;
-        }
-
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
         @media (max-width: 900px) {
             .hero { padding: 6rem 1.5rem 3rem; }
             .hero-content { grid-template-columns: 1fr; gap: 3rem; }
@@ -382,7 +335,6 @@
     </footer>
 
     <script>
-        // Splash screen logic with try/catch on malformed referrers
         (function() {
             const splash = document.getElementById('splash');
             const body = document.body;
@@ -416,7 +368,6 @@
             }, 1800);
         })();
 
-        // Fade-in observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
