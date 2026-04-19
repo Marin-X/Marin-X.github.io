@@ -121,11 +121,12 @@
                 </div>
                 <div class="project-card-body">
                     <h3>QuantFolio</h3>
-                    <p>Quantitative portfolio optimization engine — efficient frontier with CML, risk parity, Monte Carlo simulation, VaR/CVaR, backtesting, return distributions, and rolling analysis. Modular display with toggle controls.</p>
+                    <p>Quantitative portfolio optimization and factor analysis engine — efficient frontier with CML, Max Sharpe / Min Variance / Risk Parity strategies, Monte Carlo simulation, VaR/CVaR, backtesting. Decomposes portfolio returns into Fama-French factors (alpha, market, size, value, profitability, momentum) and classifies performance across bull / bear / high-volatility market regimes.</p>
                     <div class="project-tags">
                         <span class="tag">Python</span>
                         <span class="tag">Streamlit</span>
                         <span class="tag">SciPy</span>
+                        <span class="tag">Fama-French</span>
                         <span class="tag">Plotly</span>
                         <span class="tag">yfinance</span>
                     </div>
@@ -150,11 +151,12 @@
                 </div>
                 <div class="project-card-body">
                     <h3>Derivexus</h3>
-                    <p>Options pricing and Greeks visualization engine — generalized Black-Scholes-Merton with dividend yield, full Greeks suite (Δ, Γ, Θ, ν, ρ), sensitivity analysis, implied volatility surface from live market data, payoff diagrams, and put-call parity verification.</p>
+                    <p>Options pricing and volatility analysis engine — generalized Black-Scholes-Merton with continuous dividend yield, full Greeks suite (Δ, Γ, Θ, ν, ρ), implied volatility surface from live market data. Fits quadratic smile models per expiration and flags contracts whose market IV deviates &gt; 2σ from the fitted smile — a diagnostic for option mispricings.</p>
                     <div class="project-tags">
                         <span class="tag">Python</span>
                         <span class="tag">Streamlit</span>
-                        <span class="tag">Black-Scholes</span>
+                        <span class="tag">Black-Scholes-Merton</span>
+                        <span class="tag">Vol Smile Fitting</span>
                         <span class="tag">Plotly</span>
                         <span class="tag">yfinance</span>
                     </div>
