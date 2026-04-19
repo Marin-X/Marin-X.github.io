@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects — Marin Xhemollari</title>
+
+    <!-- ===== SECURITY HEADERS ===== -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
     <link rel="icon" type="image/svg+xml" href="frog-favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,10 +105,10 @@
 
     <section class="section">
         <div class="filter-tabs fade-in">
-            <button class="filter-tab active" onclick="filterProjects('all')">All</button>
-            <button class="filter-tab" onclick="filterProjects('data-science')">Data Science</button>
-            <button class="filter-tab" onclick="filterProjects('android')">Android</button>
-            <button class="filter-tab" onclick="filterProjects('backend')">Backend</button>
+            <button class="filter-tab active" onclick="filterProjects('all', event)">All</button>
+            <button class="filter-tab" onclick="filterProjects('data-science', event)">Data Science</button>
+            <button class="filter-tab" onclick="filterProjects('android', event)">Android</button>
+            <button class="filter-tab" onclick="filterProjects('backend', event)">Backend</button>
         </div>
 
         <div class="projects-grid">
@@ -123,7 +130,7 @@
                         <span class="tag">yfinance</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Marin-X/QuantFolio" target="_blank" class="project-link">
+                        <a href="https://github.com/Marin-X/QuantFolio" target="_blank" rel="noopener noreferrer" class="project-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                             GitHub
                         </a>
@@ -148,7 +155,7 @@
                         <span class="tag">yfinance</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Marin-X/Derivexus" target="_blank" class="project-link">
+                        <a href="https://github.com/Marin-X/Derivexus" target="_blank" rel="noopener noreferrer" class="project-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                             GitHub
                         </a>
@@ -173,7 +180,7 @@
                         <span class="tag">Binance API</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Marin-X/DepthLens" target="_blank" class="project-link">
+                        <a href="https://github.com/Marin-X/DepthLens" target="_blank" rel="noopener noreferrer" class="project-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                             GitHub
                         </a>
@@ -197,7 +204,7 @@
                         <span class="tag">Binance API</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Marin-X/market-microstructure" target="_blank" class="project-link">
+                        <a href="https://github.com/Marin-X/market-microstructure" target="_blank" rel="noopener noreferrer" class="project-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                             GitHub
                         </a>
@@ -221,7 +228,7 @@
                         <span class="tag">MySQL</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Marin-X" target="_blank" class="project-link">
+                        <a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer" class="project-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                             GitHub
                         </a>
@@ -244,7 +251,7 @@
                         <span class="tag">SQLite</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Marin-X" target="_blank" class="project-link">
+                        <a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer" class="project-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                             GitHub
                         </a>
@@ -256,7 +263,7 @@
     </section>
 
     <footer>
-        <p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/marinxhemollari" target="_blank">LinkedIn</a></p>
+        <p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://linkedin.com/in/marinxhemollari" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
     </footer>
 
     <script>
@@ -265,9 +272,10 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        function filterProjects(category) {
+        // Pass event explicitly instead of relying on implicit global
+        function filterProjects(category, ev) {
             document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
+            if (ev && ev.currentTarget) ev.currentTarget.classList.add('active');
             document.querySelectorAll('.project-card').forEach(card => {
                 if (category === 'all' || card.dataset.category.includes(category)) {
                     card.style.display = '';
