@@ -6,7 +6,7 @@
     <title>About — Marin Xhemollari</title>
 
     <!-- ===== SECURITY HEADERS ===== -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -17,49 +17,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .page-hero {
-            padding: 10rem 3rem 4rem;
-            text-align: center;
-            position: relative;
-        }
+        .page-hero { padding: 10rem 3rem 4rem; text-align: center; position: relative; }
         .page-hero::after {
             content: ''; position: absolute; bottom: 0; left: 0; right: 0;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
         }
-        .page-hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 300;
-        }
+        .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; }
         .page-hero h1 strong { font-weight: 700; }
         .page-hero p {
             color: var(--text-secondary); margin-top: 1rem;
             max-width: 550px; margin-left: auto; margin-right: auto;
         }
-
-        .about-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
-        }
-        .about-text p {
-            color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;
-        }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .about-text p { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem; }
         .about-text p:first-of-type::first-letter {
             font-family: 'Cormorant Garamond', serif;
             font-size: 3.5rem; float: left; line-height: 1;
             margin-right: 0.5rem; margin-top: 0.1rem;
             color: var(--emerald-bright); font-weight: 600;
         }
-        .about-details {
-            display: flex; flex-direction: column; gap: 1.5rem;
-        }
-
+        .about-details { display: flex; flex-direction: column; gap: 1.5rem; }
         .timeline-section { margin-top: 2rem; }
-
-        .resume-download {
-            text-align: center; padding: 4rem 3rem;
-            position: relative;
-        }
+        .resume-download { text-align: center; padding: 4rem 3rem; position: relative; }
         .resume-download::before {
             content: ''; position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -67,10 +47,7 @@
             background: radial-gradient(ellipse, var(--emerald-glow) 0%, transparent 70%);
             pointer-events: none;
         }
-        .resume-download p {
-            color: var(--text-secondary); margin-bottom: 1.5rem; position: relative;
-        }
-
+        .resume-download p { color: var(--text-secondary); margin-bottom: 1.5rem; position: relative; }
         @media (max-width: 900px) {
             .page-hero { padding: 8rem 1.5rem 3rem; }
             .about-grid { grid-template-columns: 1fr; gap: 2rem; }
