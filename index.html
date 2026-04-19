@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marin Xhemollari — Data Science & Quantitative Finance</title>
+
+    <!-- ===== SECURITY HEADERS ===== -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
     <link rel="icon" type="image/svg+xml" href="frog-favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -176,64 +183,67 @@
         .hero-card {
             width: 100%; max-width: 360px; aspect-ratio: 3/4;
             background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 12px; overflow: hidden;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            border-radius: 10px; overflow: hidden;
+            transition: all 0.4s ease;
         }
         .hero-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 40px var(--emerald-glow);
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px var(--emerald-glow);
         }
         .hero-card-img {
-            width: 100%; height: 65%;
-            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            width: 100%; height: 70%;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
             display: flex; align-items: center; justify-content: center;
-            border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
-        }
-        .hero-card-img img {
-            width: 100%; height: 100%; object-fit: cover;
-        }
-        .hero-card-img::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(180deg, transparent 60%, var(--bg-card));
+            border-bottom: 1px solid var(--border);
         }
         .photo-placeholder {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.7rem; color: var(--text-muted);
             text-align: center; letter-spacing: 0.1em;
         }
-        .hero-card-info { padding: 1.5rem; }
+        .hero-card-info { padding: 1.2rem; }
         .hero-card-info h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.35rem; font-weight: 600; margin-bottom: 0.25rem;
+            font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem;
         }
-        .hero-card-info p { font-size: 0.78rem; color: var(--text-muted); }
-        .hero-card-tags { display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
+        .hero-card-info p {
+            font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;
+        }
+        .hero-card-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
 
+        /* ═══════ FEATURED ═══════ */
         .featured-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
-        .featured-card { overflow: hidden; cursor: pointer; }
+        .featured-card { overflow: hidden; }
         .featured-card-img {
-            width: 100%; height: 190px;
+            width: 100%; height: 180px;
             background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
             display: flex; align-items: center; justify-content: center;
             border-bottom: 1px solid var(--border);
         }
         .featured-card-img span {
-            font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; color: var(--text-muted);
         }
         .featured-card-body { padding: 1.5rem; }
         .featured-card-body h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.35rem; font-weight: 600; margin-bottom: 0.4rem;
+            font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem;
         }
-        .featured-card-body p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; }
+        .featured-card-body p {
+            font-size: 0.85rem; color: var(--text-secondary);
+            margin-bottom: 1rem; line-height: 1.6;
+        }
         .featured-card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
         .view-all-row { text-align: center; margin-top: 3rem; }
 
+        /* ═══════ CTA ═══════ */
         .cta-banner {
-            text-align: center; padding: 5rem 3rem;
-            position: relative; overflow: hidden;
+            max-width: 1200px; margin: 4rem auto;
+            padding: 5rem 3rem; text-align: center; position: relative;
         }
         .cta-banner::before {
             content: ''; position: absolute;
@@ -244,15 +254,21 @@
         }
         .cta-banner h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-            font-weight: 300; margin-bottom: 1rem; position: relative;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300; position: relative;
         }
         .cta-banner h2 strong { font-weight: 700; }
-        .cta-banner p { color: var(--text-secondary); margin-bottom: 2rem; position: relative; }
-        .cta-buttons { display: flex; gap: 1rem; justify-content: center; position: relative; }
+        .cta-banner p {
+            color: var(--text-secondary);
+            max-width: 500px; margin: 1rem auto 2rem; position: relative;
+        }
+        .cta-buttons {
+            display: flex; gap: 1rem; justify-content: center;
+            flex-wrap: wrap; position: relative;
+        }
 
         @media (max-width: 900px) {
-            .hero { padding: 7rem 1.5rem 3rem; }
+            .hero { padding: 6rem 1.5rem 3rem; }
             .hero-content { grid-template-columns: 1fr; gap: 3rem; }
             .hero-visual { order: -1; }
             .hero-card { max-width: 260px; }
@@ -312,7 +328,6 @@
             <div class="hero-visual fade-in" style="transition-delay:0.2s;">
                 <div class="hero-card">
                     <div class="hero-card-img">
-                        <!-- Replace with: <img src="photo.jpg" alt="Marin Xhemollari"> -->
                         <div class="photo-placeholder">YOUR PHOTO<br>HERE</div>
                     </div>
                     <div class="hero-card-info">
@@ -337,16 +352,16 @@
             <h2 class="section-title">Selected <strong>projects</strong></h2>
         </div>
         <div class="featured-grid">
-            <a href="https://github.com/Marin-X/DepthLens" target="_blank" class="card featured-card fade-in">
-    <div class="featured-card-img"><img src="https://raw.githubusercontent.com/Marin-X/DepthLens/main/screenshots/dom_charts.png" alt="DepthLens" style="width:100%;height:100%;object-fit:cover;"></div>
-    <div class="featured-card-body">
-        <h3>DepthLens</h3>
-        <p>Real-time order book viewer with paper trading, VWAP/TWAP analytics, and order flow imbalance signal detection.</p>
-        <div class="featured-card-tags">
-            <span class="tag">Kotlin</span><span class="tag">Android</span><span class="tag">WebSocket</span><span class="tag">VWAP</span>
-        </div>
-    </div>
-</a>
+            <a href="https://github.com/Marin-X/DepthLens" target="_blank" rel="noopener noreferrer" class="card featured-card fade-in">
+                <div class="featured-card-img"><img src="https://raw.githubusercontent.com/Marin-X/DepthLens/main/screenshots/dom_charts.png" alt="DepthLens" style="width:100%;height:100%;object-fit:cover;"></div>
+                <div class="featured-card-body">
+                    <h3>DepthLens</h3>
+                    <p>Real-time order book viewer with paper trading, VWAP/TWAP analytics, and order flow imbalance signal detection.</p>
+                    <div class="featured-card-tags">
+                        <span class="tag">Kotlin</span><span class="tag">Android</span><span class="tag">WebSocket</span><span class="tag">VWAP</span>
+                    </div>
+                </div>
+            </a>
             <a href="projects.html" class="card featured-card fade-in" style="transition-delay:0.1s;">
                 <div class="featured-card-img"><span>[ screenshot ]</span></div>
                 <div class="featured-card-body">
@@ -357,7 +372,7 @@
                     </div>
                 </div>
             </a>
-            <a href="https://github.com/Marin-X/market-microstructure" target="_blank" class="card featured-card fade-in" style="transition-delay:0.2s;">
+            <a href="https://github.com/Marin-X/market-microstructure" target="_blank" rel="noopener noreferrer" class="card featured-card fade-in" style="transition-delay:0.2s;">
                 <div class="featured-card-img"><img src="analysis_30min.png" alt="Market Microstructure" style="width:100%;height:100%;object-fit:cover;"></div>
                 <div class="featured-card-body">
                     <h3>Market Microstructure</h3>
@@ -386,7 +401,7 @@
     </section>
 
     <footer>
-<p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/marinxhemollari" target="_blank">LinkedIn</a></p>    
+        <p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://linkedin.com/in/marinxhemollari" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
     </footer>
 
     <script>
@@ -395,10 +410,16 @@
             const splash = document.getElementById('splash');
             const body = document.body;
 
-            // Detect navigation type
+            // Detect navigation type (wrapped in try/catch — malformed referrers won't crash splash)
             const navEntry = performance.getEntriesByType('navigation')[0];
             const isReload = navEntry && navEntry.type === 'reload';
-            const isInternal = document.referrer && new URL(document.referrer).hostname === location.hostname;
+
+            let isInternal = false;
+            try {
+                isInternal = !!document.referrer && new URL(document.referrer).hostname === location.hostname;
+            } catch (e) {
+                isInternal = false;
+            }
 
             // Show splash on: fresh visit (no referrer / external) or refresh
             // Skip on: internal link clicks (Home from Projects, etc.)
