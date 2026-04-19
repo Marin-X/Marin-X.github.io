@@ -6,7 +6,7 @@
     <title>Marin Xhemollari — Data Science & Quantitative Finance</title>
 
     <!-- ===== SECURITY HEADERS ===== -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -19,30 +19,19 @@
     <style>
         /* ═══════ SPLASH SCREEN ═══════ */
         .splash {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: #0a0a0a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            overflow: hidden;
+            position: fixed; inset: 0; z-index: 9999; background: #0a0a0a;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; overflow: hidden;
         }
         .splash::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            content: ''; position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
+            width: 600px; height: 600px;
             background: radial-gradient(circle, rgba(46, 204, 113, 0.06) 0%, transparent 70%);
             pointer-events: none;
         }
         .splash-logo {
-            width: 220px;
-            height: 220px;
+            width: 220px; height: 220px;
             filter: drop-shadow(0 0 40px rgba(46, 204, 113, 0.3))
                     drop-shadow(0 0 80px rgba(46, 204, 113, 0.1));
             animation: splashPulse 1.5s ease-in-out infinite alternate;
@@ -50,11 +39,9 @@
         }
         .splash-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            font-weight: 400;
+            font-size: 1.2rem; font-weight: 400;
             color: rgba(232, 232, 232, 0);
-            letter-spacing: 0.15em;
-            margin-top: 2rem;
+            letter-spacing: 0.15em; margin-top: 2rem;
             animation: splashTextIn 0.6s ease-out 0.3s forwards;
         }
 
@@ -69,7 +56,6 @@
             to   { opacity: 0.4; transform: translateY(0); }
         }
 
-        /* ─── Exit animation ─── */
         .splash.exit .splash-logo {
             animation: splashShrink 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
@@ -95,18 +81,13 @@
             to { opacity: 0; visibility: hidden; pointer-events: none; }
         }
 
-        /* Hide page content until splash exits */
-        body.splash-active {
-            overflow: hidden;
-        }
+        body.splash-active { overflow: hidden; }
         body.splash-active nav,
         body.splash-active .hero,
         body.splash-active .section,
         body.splash-active .divider,
         body.splash-active .cta-banner,
-        body.splash-active footer {
-            opacity: 0;
-        }
+        body.splash-active footer { opacity: 0; }
         body.splash-done nav,
         body.splash-done .hero,
         body.splash-done .section,
@@ -283,7 +264,6 @@
 </head>
 <body class="splash-active">
 
-    <!-- ═══════ SPLASH SCREEN ═══════ -->
     <div class="splash" id="splash">
         <img src="frog-logo.svg" alt="QuantFolio" class="splash-logo">
         <div class="splash-text">Marin Xhemollari</div>
@@ -302,7 +282,6 @@
         </ul>
     </nav>
 
-    <!-- HERO -->
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text fade-in">
@@ -345,7 +324,6 @@
         </div>
     </section>
 
-    <!-- FEATURED PROJECTS -->
     <section class="section">
         <div class="section-header fade-in">
             <div class="section-label">Featured Work</div>
@@ -390,7 +368,6 @@
 
     <div class="divider"></div>
 
-    <!-- CTA -->
     <section class="cta-banner fade-in">
         <h2>Interested in <strong>collaborating</strong>?</h2>
         <p>Open to research partnerships, project collaborations, and opportunities in quantitative finance.</p>
@@ -405,12 +382,11 @@
     </footer>
 
     <script>
-        // ═══════ SPLASH SCREEN LOGIC ═══════
+        // Splash screen logic with try/catch on malformed referrers
         (function() {
             const splash = document.getElementById('splash');
             const body = document.body;
 
-            // Detect navigation type (wrapped in try/catch — malformed referrers won't crash splash)
             const navEntry = performance.getEntriesByType('navigation')[0];
             const isReload = navEntry && navEntry.type === 'reload';
 
@@ -421,8 +397,6 @@
                 isInternal = false;
             }
 
-            // Show splash on: fresh visit (no referrer / external) or refresh
-            // Skip on: internal link clicks (Home from Projects, etc.)
             if (isInternal && !isReload) {
                 splash.remove();
                 body.classList.remove('splash-active');
@@ -432,19 +406,17 @@
 
             setTimeout(function() {
                 splash.classList.add('exit');
-
                 setTimeout(function() {
                     body.classList.remove('splash-active');
                     body.classList.add('splash-done');
                 }, 700);
-
                 setTimeout(function() {
                     splash.remove();
                 }, 1300);
             }, 1800);
         })();
 
-        // ═══════ FADE-IN OBSERVER ═══════
+        // Fade-in observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
