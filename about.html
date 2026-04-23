@@ -39,7 +39,7 @@
         }
         .about-details { display: flex; flex-direction: column; gap: 1.5rem; }
         .timeline-section { margin-top: 2rem; }
-        .resume-download { text-align: center; padding: 4rem 3rem; position: relative; }
+        .resume-download { text-align: center; padding: 4rem 3rem; position: relative; overflow: hidden; }
         .resume-download::before {
             content: ''; position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -51,6 +51,7 @@
         @media (max-width: 900px) {
             .page-hero { padding: 8rem 1.5rem 3rem; }
             .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .resume-download { padding: 4rem 1.5rem; }
         }
     </style>
 </head>
