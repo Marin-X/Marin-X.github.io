@@ -100,7 +100,7 @@
 
     <section class="page-hero fade-in">
         <h1>My <strong>Projects</strong></h1>
-        <p>A collection of applications, tools, and experiments spanning data science, Android development, and backend engineering.</p>
+        <p>A collection of applications, tools, and experiments spanning quantitative finance, data science, and Android development.</p>
     </section>
 
     <section class="section">
@@ -108,7 +108,6 @@
             <button class="filter-tab active" onclick="filterProjects('all', event)">All</button>
             <button class="filter-tab" onclick="filterProjects('data-science', event)">Data Science</button>
             <button class="filter-tab" onclick="filterProjects('android', event)">Android</button>
-            <button class="filter-tab" onclick="filterProjects('backend', event)">Backend</button>
         </div>
 
         <div class="projects-grid">
@@ -173,15 +172,46 @@
                 </div>
             </div>
 
+            <!-- NewsLens -->
+            <div class="card project-card fade-in" data-category="data-science" style="transition-delay:0.1s;">
+                <div class="project-card-img">
+                    <img src="https://raw.githubusercontent.com/Marin-X/NewsLens/main/dashboard.png" alt="NewsLens" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>NewsLens</h3>
+                    <p>FinBERT sentiment as an equity alpha factor across the S&amp;P 500 — end-to-end research pipeline ingesting ~155k news articles, scoring with a transformer model, and constructing 5 signal variants across 3 forward horizons. Volume-weighted 21d sentiment delivers IC t-stat = +2.98, long-short Sharpe = 2.63 (pre-cost), 83% hit rate over 65 daily portfolios.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">FinBERT</span>
+                        <span class="tag">Transformers</span>
+                        <span class="tag">Streamlit</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Finnhub</span>
+                        <span class="tag">Plotly</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://newslens-marinx.streamlit.app" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Live Demo
+                        </a>
+                        <a href="https://github.com/Marin-X/NewsLens" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <!-- DepthLens -->
-            <div class="card project-card fade-in" data-category="android data-science" style="transition-delay:0.1s;">
+            <div class="card project-card fade-in" data-category="android data-science" style="transition-delay:0.15s;">
                 <div class="project-card-img">
                     <img src="https://raw.githubusercontent.com/Marin-X/DepthLens/main/screenshots/dom_charts.png" alt="DepthLens" style="width:100%;height:100%;object-fit:cover;">
                     <span class="project-status status-live">Live</span>
                 </div>
                 <div class="project-card-body">
                     <h3>DepthLens</h3>
-                    <p>Real-time order book viewer with paper trading, VWAP/TWAP analytics, and order flow imbalance signal detection. WebSocket streaming at 100ms with persistent trade history and live P&L tracking.</p>
+                    <p>Real-time order book viewer with paper trading, VWAP/TWAP analytics, and order flow imbalance signal detection. WebSocket streaming at 100ms with persistent trade history and live P&amp;L tracking.</p>
                     <div class="project-tags">
                         <span class="tag">Kotlin</span>
                         <span class="tag">Android</span>
@@ -199,7 +229,7 @@
             </div>
 
             <!-- Market Microstructure -->
-            <div class="card project-card fade-in" data-category="data-science" style="transition-delay:0.15s;">
+            <div class="card project-card fade-in" data-category="data-science" style="transition-delay:0.2s;">
                 <div class="project-card-img">
                     <img src="analysis_30min.png" alt="Market Microstructure" style="width:100%;height:100%;object-fit:cover;">
                     <span class="project-status status-live">Live</span>
@@ -222,53 +252,6 @@
                 </div>
             </div>
 
-            <!-- Finance Ledger API -->
-            <div class="card project-card fade-in" data-category="backend" style="transition-delay:0.2s;">
-                <div class="project-card-img">
-                    <span>[ screenshot ]</span>
-                    <span class="project-status status-live">Live</span>
-                </div>
-                <div class="project-card-body">
-                    <h3>Finance Ledger API</h3>
-                    <p>RESTful API for financial transaction management built with Spring Boot. Features comprehensive CRUD operations, JWT authentication, data validation, and clean architecture patterns.</p>
-                    <div class="project-tags">
-                        <span class="tag">Java</span>
-                        <span class="tag">Spring Boot</span>
-                        <span class="tag">REST</span>
-                        <span class="tag">MySQL</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer" class="project-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                            GitHub
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- XhemoBank -->
-            <div class="card project-card fade-in" data-category="android" style="transition-delay:0.25s;">
-                <div class="project-card-img">
-                    <span>[ screenshot ]</span>
-                    <span class="project-status status-live">Live</span>
-                </div>
-                <div class="project-card-body">
-                    <h3>XhemoBank</h3>
-                    <p>Android banking application demonstrating core mobile development patterns including user authentication, account management, and transaction handling.</p>
-                    <div class="project-tags">
-                        <span class="tag">Kotlin</span>
-                        <span class="tag">Android</span>
-                        <span class="tag">SQLite</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer" class="project-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                            GitHub
-                        </a>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
 
@@ -282,7 +265,6 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Pass event explicitly instead of relying on implicit global
         function filterProjects(category, ev) {
             document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
             if (ev && ev.currentTarget) ev.currentTarget.classList.add('active');
