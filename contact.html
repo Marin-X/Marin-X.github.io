@@ -6,7 +6,7 @@
     <title>Contact - Marin Xhemollari</title>
 
     <!-- ===== SECURITY HEADERS ===== -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -84,7 +84,7 @@
             pointer-events: none !important;
         }
 
-        /* ===== Inline form status messages (replace Formspree redirect) ===== */
+        /* ===== Inline form status messages ===== */
         .form-status {
             padding: 1.5rem 1.75rem; border-radius: 8px;
             border: 1px solid var(--border);
@@ -151,10 +151,18 @@
 
                 <div id="form-status-container" aria-live="polite"></div>
 
-                <form id="contact-form" action="https://formspree.io/f/xgopaany" method="POST">
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Web3Forms access key -->
+                    <input type="hidden" name="access_key" value="36d70038-d388-4696-bf54-0352f1e2b538">
+                    <!-- Email subject line -->
+                    <input type="hidden" name="subject" value="New message from marinxhemollari.com">
+                    <!-- Sender label in the email Marin receives -->
+                    <input type="hidden" name="from_name" value="marinxhemollari.com Contact Form">
+
+                    <!-- Honeypot (Web3Forms convention: 'botcheck'). Real users won't fill this; bots will. -->
                     <div class="hp-field" aria-hidden="true">
                         <label for="hp-gotcha">Leave this field empty</label>
-                        <input type="text" id="hp-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+                        <input type="checkbox" id="hp-gotcha" name="botcheck" tabindex="-1" autocomplete="off">
                     </div>
 
                     <div class="form-group">
@@ -167,7 +175,7 @@
                     </div>
                     <div class="form-group">
                         <label for="contact-subject">Subject</label>
-                        <input type="text" id="contact-subject" name="subject" placeholder="What is this about?" maxlength="200">
+                        <input type="text" id="contact-subject" name="user_subject" placeholder="What is this about?" maxlength="200">
                     </div>
                     <div class="form-group">
                         <label for="contact-message">Message</label>
@@ -243,7 +251,7 @@
             el.appendChild(a);
         })();
 
-        // ===== AJAX form submission (skips Formspree's "Almost There" captcha redirect) =====
+        // ===== AJAX form submission via Web3Forms (no captcha, no redirect) =====
         (function() {
             var form = document.getElementById('contact-form');
             var status = document.getElementById('form-status-container');
@@ -254,7 +262,7 @@
                 status.innerHTML =
                     '<div class="form-status success">' +
                         '<h3>Message sent</h3>' +
-                        '<p>Thanks for reaching out — I\u2019ll get back to you soon.</p>' +
+                        '<p>Thanks for reaching out \u2014 I\u2019ll get back to you soon.</p>' +
                     '</div>';
                 form.style.display = 'none';
                 status.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -282,17 +290,15 @@
                         body: new FormData(form),
                         headers: { 'Accept': 'application/json' }
                     });
-                    if (response.ok) {
+                    var data = await response.json().catch(function() { return {}; });
+
+                    if (response.ok && data.success) {
                         showSuccess();
                     } else {
-                        var data = await response.json().catch(function() { return {}; });
-                        var msg = (data.errors && data.errors.length)
-                            ? data.errors.map(function(e) { return e.message; }).join(', ')
-                            : null;
-                        showError(msg);
+                        showError(data.message || null);
                     }
                 } catch (err) {
-                    showError('Network error — check your connection and try again.');
+                    showError('Network error \u2014 check your connection and try again.');
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.textContent = originalText;
