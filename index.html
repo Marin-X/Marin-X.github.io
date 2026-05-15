@@ -132,7 +132,7 @@
         }
         .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
 
-        /* ===== Portrait card — redesigned ===== */
+        /* ===== Portrait card ===== */
         .hero-card {
             width: 100%; max-width: 340px; aspect-ratio: 3/4;
             background: var(--bg-card);
@@ -164,7 +164,7 @@
         }
         .hero-card-img {
             position: relative;
-            width: 100%; height: 78%;
+            width: 100%; height: 72%;
             background: radial-gradient(ellipse at 50% 40%,
                 rgba(46, 204, 113, 0.06) 0%,
                 var(--bg-secondary) 50%,
@@ -177,16 +177,16 @@
             width: 105%; height: 108%;
             object-fit: cover;
             object-position: center 8%;
-            -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
-            mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
             filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.5));
         }
         .hero-card-info {
-            padding: 0.9rem 1.2rem 1.3rem;
+            padding: 1rem 1.2rem 1.3rem;
             text-align: center;
             position: relative;
             z-index: 2;
-            margin-top: -2.5rem;
+            margin-top: 0;
         }
         .hero-card-info h3 { display: none; }
         .hero-card-info p {
@@ -202,7 +202,7 @@
             display: flex; gap: 0.35rem; flex-wrap: wrap;
             justify-content: center;
         }
-        /* ===================================== */
+        /* ========================== */
 
         .featured-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
