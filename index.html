@@ -146,18 +146,12 @@
             background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
             display: flex; align-items: center; justify-content: center;
             border-bottom: 1px solid var(--border);
+            overflow: hidden;
         }
         .hero-card-logo {
-            width: 55%; height: auto;
-            filter: drop-shadow(0 0 25px rgba(46, 204, 113, 0.35))
-                    drop-shadow(0 0 50px rgba(46, 204, 113, 0.12));
-            animation: cardLogoPulse 3s ease-in-out infinite alternate;
-        }
-        @keyframes cardLogoPulse {
-            from { filter: drop-shadow(0 0 20px rgba(46, 204, 113, 0.25))
-                           drop-shadow(0 0 40px rgba(46, 204, 113, 0.08)); }
-            to   { filter: drop-shadow(0 0 35px rgba(46, 204, 113, 0.45))
-                           drop-shadow(0 0 60px rgba(46, 204, 113, 0.15)); }
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: center top;
+            filter: drop-shadow(0 0 25px rgba(46, 204, 113, 0.18));
         }
         .hero-card-info { padding: 1.2rem; }
         .hero-card-info h3 {
@@ -269,7 +263,7 @@
             <div class="hero-visual fade-in" style="transition-delay:0.2s;">
                 <div class="hero-card">
                     <div class="hero-card-img">
-                        <img src="frog-logo.svg" alt="Marin Xhemollari" class="hero-card-logo">
+                        <img src="marin-headshot.png" alt="Marin Xhemollari" class="hero-card-logo">
                     </div>
                     <div class="hero-card-info">
                         <h3>Marin Xhemollari</h3>
