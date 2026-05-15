@@ -130,36 +130,80 @@
             font-size: 0.75rem; color: var(--text-muted);
             text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.25rem;
         }
-        .hero-visual { display: flex; justify-content: center; align-items: center; }
+        .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+
+        /* ===== Portrait card — redesigned ===== */
         .hero-card {
-            width: 100%; max-width: 360px; aspect-ratio: 3/4;
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 10px; overflow: hidden; transition: all 0.4s ease;
+            width: 100%; max-width: 340px; aspect-ratio: 3/4;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            isolation: isolate;
+        }
+        .hero-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 1.5rem; right: 1.5rem; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--emerald-bright), transparent);
+            opacity: 0.5; z-index: 3;
+        }
+        .hero-card::after {
+            content: ''; position: absolute;
+            inset: 0; pointer-events: none;
+            background: radial-gradient(ellipse at 50% 30%,
+                rgba(46, 204, 113, 0.10) 0%,
+                transparent 55%);
+            z-index: 1;
         }
         .hero-card:hover {
-            border-color: var(--border-hover);
+            border-color: rgba(46, 204, 113, 0.4);
             transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px var(--emerald-glow);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(46, 204, 113, 0.18);
         }
         .hero-card-img {
-            width: 100%; height: 70%;
-            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
-            display: flex; align-items: center; justify-content: center;
-            border-bottom: 1px solid var(--border);
+            position: relative;
+            width: 100%; height: 78%;
+            background: radial-gradient(ellipse at 50% 40%,
+                rgba(46, 204, 113, 0.06) 0%,
+                var(--bg-secondary) 50%,
+                var(--bg-primary) 100%);
+            display: flex; align-items: flex-end; justify-content: center;
             overflow: hidden;
+            z-index: 2;
         }
         .hero-card-logo {
-            width: 100%; height: 100%;
-            object-fit: cover; object-position: center top;
-            filter: drop-shadow(0 0 25px rgba(46, 204, 113, 0.18));
+            width: 105%; height: 108%;
+            object-fit: cover;
+            object-position: center 8%;
+            -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.5));
         }
-        .hero-card-info { padding: 1.2rem; }
-        .hero-card-info h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem;
+        .hero-card-info {
+            padding: 0.9rem 1.2rem 1.3rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            margin-top: -2.5rem;
         }
-        .hero-card-info p { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; }
-        .hero-card-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+        .hero-card-info h3 { display: none; }
+        .hero-card-info p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--emerald-bright);
+            margin-bottom: 0.9rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+        .hero-card-tags {
+            display: flex; gap: 0.35rem; flex-wrap: wrap;
+            justify-content: center;
+        }
+        /* ===================================== */
+
         .featured-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
@@ -266,8 +310,7 @@
                         <img src="marin-headshot.png" alt="Marin Xhemollari" class="hero-card-logo">
                     </div>
                     <div class="hero-card-info">
-                        <h3>Marin Xhemollari</h3>
-                        <p>University of Michigan — LSA Data Science</p>
+                        <p>Data Science · Quant Finance</p>
                         <div class="hero-card-tags">
                             <span class="tag">Python</span>
                             <span class="tag">SQL</span>
