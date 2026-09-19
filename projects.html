@@ -6,6 +6,319 @@
     <title>Projects — Marin Xhemollari</title>
 
     <!-- ===== SECURITY HEADERS ===== -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline' https://gc.zgo.at; connect-src 'self' https://marinxhemollari.goatcounter.com; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <link rel="icon" type="image/svg+xml" href="frog-favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero {
+            padding: 10rem 3rem 4rem; text-align: center; position: relative;
+        }
+        .page-hero::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
+        }
+        .page-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300;
+        }
+        .page-hero h1 strong { font-weight: 700; }
+        .page-hero p {
+            color: var(--text-secondary); margin-top: 1rem;
+            max-width: 550px; margin-left: auto; margin-right: auto;
+        }
+
+        .filter-tabs {
+            display: flex; gap: 0.5rem; justify-content: center;
+            margin-bottom: 3rem; flex-wrap: wrap;
+        }
+        .filter-tab {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+            padding: 0.5rem 1.2rem; border-radius: 6px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--text-secondary); cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-tab:hover, .filter-tab.active {
+            border-color: var(--emerald-bright); color: var(--emerald-bright);
+            background: var(--emerald-subtle);
+        }
+
+        .projects-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card { overflow: hidden; position: relative; }
+        .project-card-img {
+            width: 100%; height: 200px;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
+            display: flex; align-items: center; justify-content: center;
+            border-bottom: 1px solid var(--border); position: relative;
+        }
+        .project-card-img span {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted);
+        }
+        .project-card-body { padding: 1.5rem; }
+        .project-card-body h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem;
+        }
+        .project-card-body p {
+            font-size: 0.85rem; color: var(--text-secondary);
+            margin-bottom: 1rem; line-height: 1.6;
+        }
+        .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .project-links { display: flex; gap: 1rem; }
+
+        @media (max-width: 900px) {
+            .page-hero { padding: 8rem 1.5rem 3rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo"><img src="frog-logo.svg" alt="logo"></a>
+        <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="page-hero fade-in">
+        <h1>My <strong>Projects</strong></h1>
+        <p>A collection of applications, tools, and experiments spanning quantitative finance, data science, and Android development.</p>
+    </section>
+
+    <section class="section">
+        <div class="filter-tabs fade-in">
+            <button class="filter-tab active" onclick="filterProjects('all', event)">All</button>
+            <button class="filter-tab" onclick="filterProjects('data-science', event)">Data Science</button>
+            <button class="filter-tab" onclick="filterProjects('android', event)">Android</button>
+        </div>
+
+        <div class="projects-grid">
+
+            <!-- QuantFolio -->
+            <div class="card project-card fade-in" data-category="data-science">
+                <div class="project-card-img">
+                    <img src="https://raw.githubusercontent.com/Marin-X/QuantFolio/main/dashboard.png" alt="QuantFolio" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>QuantFolio</h3>
+                    <p>Quantitative portfolio optimization and factor analysis engine — efficient frontier with CML, Max Sharpe / Min Variance / Risk Parity strategies, Monte Carlo simulation, VaR/CVaR, backtesting. Decomposes portfolio returns into Fama-French factors (alpha, market, size, value, profitability, momentum) and classifies performance across bull / bear / high-volatility market regimes.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Streamlit</span>
+                        <span class="tag">SciPy</span>
+                        <span class="tag">Fama-French</span>
+                        <span class="tag">Plotly</span>
+                        <span class="tag">yfinance</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://quantfolio-marinx.streamlit.app" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Live Demo
+                        </a>
+                        <a href="https://github.com/Marin-X/QuantFolio" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Probatus -->
+            <div class="card project-card fade-in" data-category="data-science" style="transition-delay:0.05s;">
+                <div class="project-card-img">
+                    <img src="https://raw.githubusercontent.com/Marin-X/Probatus/main/screenshots/strategy-comparison.png" alt="Probatus" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>Probatus</h3>
+                    <p>Event-driven multi-strategy backtester — five trading philosophies in one engine (trend following, mean reversion, breakout, exhaustion reversal via Pine Script port, and 2-of-3 ensemble) with realistic execution costs (IBKR commissions, bid-ask half-spread, Almgren-Chriss square-root market impact). Walk-forward analysis produces unbiased out-of-sample Sharpe — on AAPL/MSFT/SPY 2018-2024, Donchian Breakout achieves the only Sharpe above SPY (0.98 vs 0.76) while the ensemble produces the smallest max drawdown (-15.4%).</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Streamlit</span>
+                        <span class="tag">Event-Driven</span>
+                        <span class="tag">Walk-Forward</span>
+                        <span class="tag">Almgren-Chriss</span>
+                        <span class="tag">Plotly</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://probatus-marinx.streamlit.app" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Live Demo
+                        </a>
+                        <a href="https://github.com/Marin-X/Probatus" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Derivexus -->
+            <div class="card project-card fade-in" data-category="data-science" style="transition-delay:0.1s;">
+                <div class="project-card-img">
+                    <img src="https://raw.githubusercontent.com/Marin-X/Derivexus/main/dashboard.png" alt="Derivexus" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>Derivexus</h3>
+                    <p>Options pricing and volatility analysis engine — generalized Black-Scholes-Merton with continuous dividend yield, full Greeks suite (Δ, Γ, Θ, ν, ρ), implied volatility surface from live market data. Fits quadratic smile models per expiration and flags contracts whose market IV deviates &gt; 2σ from the fitted smile — a diagnostic for option mispricings.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Streamlit</span>
+                        <span class="tag">Black-Scholes-Merton</span>
+                        <span class="tag">Vol Smile Fitting</span>
+                        <span class="tag">Plotly</span>
+                        <span class="tag">yfinance</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://derivexus-marinx.streamlit.app" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Live Demo
+                        </a>
+                        <a href="https://github.com/Marin-X/Derivexus" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NewsLens -->
+            <div class="card project-card fade-in" data-category="data-science" style="transition-delay:0.15s;">
+                <div class="project-card-img">
+                    <img src="https://raw.githubusercontent.com/Marin-X/NewsLens/main/dashboard.png" alt="NewsLens" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>NewsLens</h3>
+                    <p>FinBERT sentiment as an equity alpha factor across the S&amp;P 500 — end-to-end research pipeline ingesting ~155k news articles, scoring with a transformer model, and constructing 5 signal variants across 3 forward horizons. Volume-weighted 21d sentiment delivers IC t-stat = +2.98, long-short Sharpe = 2.63 (pre-cost), 83% hit rate over 65 daily portfolios.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">FinBERT</span>
+                        <span class="tag">Transformers</span>
+                        <span class="tag">Streamlit</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Finnhub</span>
+                        <span class="tag">Plotly</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://newslens-marinx.streamlit.app" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Live Demo
+                        </a>
+                        <a href="https://github.com/Marin-X/NewsLens" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DepthLens -->
+            <div class="card project-card fade-in" data-category="android data-science" style="transition-delay:0.2s;">
+                <div class="project-card-img">
+                    <img src="https://raw.githubusercontent.com/Marin-X/DepthLens/main/screenshots/dom_charts.png" alt="DepthLens" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>DepthLens</h3>
+                    <p>Real-time order book viewer with paper trading, VWAP/TWAP analytics, and order flow imbalance signal detection. WebSocket streaming at 100ms with persistent trade history and live P&amp;L tracking.</p>
+                    <div class="project-tags">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag">Android</span>
+                        <span class="tag">WebSocket</span>
+                        <span class="tag">VWAP</span>
+                        <span class="tag">Binance API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Marin-X/DepthLens" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Microstructure -->
+            <div class="card project-card fade-in" data-category="data-science" style="transition-delay:0.25s;">
+                <div class="project-card-img">
+                    <img src="analysis_30min.png" alt="Market Microstructure" style="width:100%;height:100%;object-fit:cover;">
+                    <span class="project-status status-live">Live</span>
+                </div>
+                <div class="project-card-body">
+                    <h3>Market Microstructure</h3>
+                    <p>BTC/USDT order book analysis — real-time data collection, spread dynamics, order flow imbalance, and statistical regression on 600+ snapshots.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">Scipy</span>
+                        <span class="tag">Binance API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Marin-X/market-microstructure" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Marin Xhemollari · <a href="https://github.com/Marin-X" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://linkedin.com/in/marinxhemollari" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        function filterProjects(category, ev) {
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            if (ev && ev.currentTarget) ev.currentTarget.classList.add('active');
+            document.querySelectorAll('.project-card').forEach(card => {
+                if (category === 'all' || card.dataset.category.includes(category)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+    <!-- GoatCounter analytics — privacy-friendly, no cookies -->
+    <script data-goatcounter="https://marinxhemollari.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Marin Xhemollari</title>
+
+    <!-- ===== SECURITY HEADERS ===== -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com; script-src 'self' 'unsafe-inline'; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
